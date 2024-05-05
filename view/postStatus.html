@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="container border-bottom">
+      <div class="row">
+        <div class="nav">
+          <p class="nav-text">MetaWall</p>
+          <div class="nav-user">
+            <img src="" alt="user" class="nav-user-img" />
+            <span class="nav-user-name">Member</span>
+            <!-- hover出現的選單 -->
+            <div class="nav-user-hover border">
+              <div class="nav-user-hover-text">
+                <p class="padding border-bottom">我的貼文牆</p>
+                <p class="padding border-bottom">修改個人資料</p>
+                <p class="padding">登出</p>
+              </div>
+            </div>
+            <div class="nav-user-hover-shadow border">
+              <div class="nav-user-hover-text">
+                <p class="padding border-bottom-white">我的貼文牆</p>
+                <p class="padding border-bottom-white">修改個人資料</p>
+                <p class="padding border-bottom-white">登出</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <!-- 左邊動態牆 -->
+        <div class="col wall-left">
+          <div class="edit-info">
+            <p class="border">
+              <span class="edit-info-text">張貼動態</span>
+            </p>
+            <p class="border">
+              <span class="edit-info-text">張貼動態</span>
+            </p>
+          </div>
+
+          <!-- 張貼區 -->
+          <div class="post-block border">
+            <div class="post-content">
+              <span class="">貼文內容</span>
+              <textarea
+                rows="10"
+                cols="10"
+                placeholder="輸入您的貼文內容"
+                class="border"
+                id="post-content"
+              ></textarea>
+            </div>
+            <div class="post-img">
+              <button type="button" id="uploadPhoto">上傳圖片</button>
+              <input type="file" id="inputPhoto" style="display: none" />
+              <div id="renderPhoto"></div>
+            </div>
+
+            <div class="post-wrong-msg">
+              <span class="">圖片檔案過大，僅限1mb以下檔案</span>
+              <span class="">圖片格式錯誤，僅限JPG、PNG圖片</span>
+            </div>
+
+            <div class="post-btn">
+              <button type="button" class="border" id="post-btn">
+                送出貼文
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右邊控制項 -->
+        <div class="col">
+          <div class="user-info">
+            <p class="post">
+              <button type="button">張貼動態</button>
+            </p>
+            <p class="name">
+              <button type="button" class="">
+                <img src="" alt="" class="" />
+                <span class=""> 邊緣小杰 </span>
+              </button>
+            </p>
+            <p class="stalk">
+              <button type="button" class="">
+                <p class="bell-icon">
+                  <span class="material-icons"> notifications_none </span>
+                </p>
+                <span class=""> 追蹤名單 </span>
+              </button>
+            </p>
+            <p class="like">
+              <button type="button" class="">
+                <p class="thumbup-icon">
+                  <span class="material-icons"> thumb_up_off_alt </span>
+                </p>
+                <span class=""> 我按讚的文章 </span>
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Azeret+Mono&family=Noto+Sans+TC:wght@400;500;700&family=Paytone+One&display=swap");
+
+  * {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    box-sizing: border-box;
+  }
+
+  /* 通用CSS */
+  .border {
+    border: 2px solid #000400;
+  }
+
+  .border-bottom {
+    border-bottom: 2px solid #000400;
+  }
+
+  .border-bottom-white {
+    border-bottom: 2px solid #fff;
+  }
+
+  .padding {
+    padding: 8px 0;
+  }
+
+  .ml16 {
+    margin-left: 16px;
+  }
+
+  .container {
+    width: 100%;
+    margin-bottom: 49px;
+  }
+
+  .row {
+    width: 865px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .wall-left {
+    width: 533px;
+  }
+
+  /* ---------------導覽列開始--------------- */
+  /* 導覽列 */
+  .nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* 導覽列左邊LOGO */
+  .nav-text {
+    font-family: "Paytone One", sans-serif;
+    font-weight: bold;
+    font-size: 36px;
+    color: #000400;
+  }
+
+  /* 導覽列右邊使用者的外框 */
+  .nav-user {
+    display: flex;
+    align-items: center;
+    cursor: default;
+    position: relative;
+  }
+
+  /* 導覽列右邊使用者hover */
+  .nav-user:hover > .nav-user-hover {
+    display: block;
+    position: absolute;
+    top: 34px;
+    left: -8px;
+    z-index: 10;
+  }
+
+  /* 使用同樣選單當成hover的影子 */
+  .nav-user:hover > .nav-user-hover-shadow {
+    display: block;
+    position: absolute;
+    top: 40px;
+    left: 0px;
+  }
+
+  .nav-user-hover,
+  .nav-user-hover-shadow {
+    width: 182px;
+    text-align: center;
+    display: none;
+    background: #fff;
+    font-family: "Noto Sans TC", sans-serif;
+    font-weight: 300;
+  }
+
+  .nav-user-hover p {
+    cursor: default;
+  }
+
+  /* HOVER選單指到改顏色 */
+  .nav-user-hover p:hover {
+    background: #efece7;
+  }
+
+  /* 導覽列右邊使用者大頭照 */
+  .nav-user-img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    cursor: default;
+  }
+
+  /* 導覽列右邊使用者名稱 */
+  .nav-user-name {
+    font-family: "Azeret Mono", sans-serif;
+    font-weight: bold;
+    border-bottom: 2px solid #000400;
+    padding: 0 4.5px 4.5px;
+    cursor: default;
+  }
+
+  /* ---------------導覽列結束--------------- */
+
+  /* ---------------動態牆開始--------------- */
+
+  /* 動態牆左邊控制項開始 */
+  .edit-info {
+    position: relative;
+    width: 533px;
+    height: 64px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  /* 定位追蹤名單容器位置 */
+  .edit-info p {
+    background: #fff;
+    position: absolute;
+    width: 100%;
+    padding: 18px;
+  }
+
+  /* 第二個往左下移動 */
+  .edit-info p:nth-child(2) {
+    top: 4px;
+    left: -4px;
+    z-index: -1;
+  }
+
+  .edit-info span {
+    font-family: "Azeret Mono", sans-serif;
+    font-weight: bold;
+    color: #000400;
+  }
+
+  /* 發文區塊 */
+  .post-block {
+    padding: 32px;
+    background: #ffffff;
+    box-shadow: 0px 3px 0px #000400;
+    border-radius: 8px;
+  }
+
+  /* 發文文章 */
+  .post-block .post-content {
+    margin-bottom: 16px;
+  }
+
+  .post-block .post-content span {
+    font-family: "Azeret Mono", sans-serif;
+    font-size: 16px;
+    color: #000400;
+    margin-bottom: 4px;
+  }
+
+  .post-block .post-content textarea {
+    width: 100%;
+    height: 170px;
+    padding: 16px 12px;
+  }
+
+  /* 發文圖片 */
+  .post-block .post-img {
+    margin-bottom: 32px;
+  }
+
+  .post-block .post-img button {
+    margin-bottom: 16px;
+    padding: 4px 32px;
+    bottom: 0;
+    font-family: "Azeret Mono", sans-serif;
+    font-size: 16px;
+    color: #fff;
+    background: #000400;
+    border: none;
+  }
+
+  .post-block .post-img img {
+    width: 469px;
+    height: 157px;
+  }
+
+  /* 發文錯誤訊息 */
+  .post-wrong-msg {
+    display: none;
+    margin-top: 32px;
+    margin-bottom: 16px;
+  }
+  .post-wrong-msg span {
+    display: block;
+    text-align: center;
+    font-family: "Azeret Mono", sans-serif;
+    font-size: 16px;
+    color: #f57375;
+  }
+  /* 發文按鈕 */
+  .post-block .post-btn {
+    display: flex;
+    justify-content: center;
+  }
+
+  .post-block .post-btn button {
+    background: #a8b0b9;
+    border-radius: 8px;
+    color: #000400;
+    padding: 16px 130px;
+  }
+
+  .post-block .post-btn button:active {
+    background: #eec32a;
+    color: #000400;
+  }
+
+  /* 動態牆左邊控制項結束 */
+
+  /* 動態牆右邊控制項開始 */
+  .user-info {
+    padding: 32px 24px;
+    border: 2px solid #000400;
+  }
+
+  /* 控制項發佈按鈕 */
+  .user-info .post button {
+    width: 260px;
+    background: #03438d;
+    box-shadow: -2px 2px 0px #000400;
+    border: 2px solid #000400;
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: "Azeret Mono";
+    font-weight: bold;
+    padding: 16px 0;
+    text-align: center;
+  }
+
+  /* 控制項發佈按鈕hover */
+  .user-info .post button:hover {
+    background: #eec32a;
+    color: #000400;
+  }
+
+  /* 控制項之間的距離 */
+  .user-info .name,
+  .user-info .stalk,
+  .user-info .like {
+    margin-top: 24px;
+  }
+
+  /* 控制項按鈕得背景與外框 */
+  .user-info .name button,
+  .user-info .stalk button,
+  .user-info .like button {
+    background: #fff;
+    border: none;
+    display: flex;
+    align-items: center;
+
+    font-family: "Noto Sans TC";
+    font-weight: 500;
+    color: #000400;
+  }
+
+  /* 設定控制項與字的距離 */
+  .user-info .name button > span,
+  .user-info .stalk button > span,
+  .user-info .like button > span {
+    margin-left: 16px;
+  }
+
+  /* 鈴鐺cion 按讚icon*/
+  .user-info .stalk .bell-icon,
+  .user-info .like .thumbup-icon {
+    background: #e2edfa;
+    border: 2px solid #000400;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* 控制項按鈕摸到改變字的顏色 */
+  .user-info .name button:hover,
+  .user-info .stalk button:hover,
+  .user-info .like button:hover {
+    color: #03438d;
+  }
+
+  /* 控制項按鈕摸到改變icon的顏色 */
+  .user-info .stalk button:hover .bell-icon,
+  .user-info .like button:hover .thumbup-icon {
+    background: #03438d;
+    color: #fff;
+  }
+
+  /* 動態牆右邊控制項結束 */
+
+  /* ---------------動態牆結束--------------- */
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.5/axios.min.js"></script>
+
+<script>
+  const url = "https://two024nodew4.onrender.com"
+  const navImg = document.querySelector(".nav-user-img")
+
+  function getData() {
+    axios.get(`${url}/users`).then((res) => {
+      const userData = res.data.data[0];
+      navImg.src = userData.image;
+    })
+  }
+
+  function init() {
+    getData()
+  }
+
+  init()
+</script>

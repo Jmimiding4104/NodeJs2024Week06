@@ -1,11 +1,9 @@
 const middlewareContent = require('./middlewareContent');
+const resErrorDev = require('./resErrorDev');
 
 function middleware(err, req, res, next) {
 	if (process.env.NODE_ENV === 'dev') {
-		process.on('unhandledRejection', (reason, promise) => {
-			console.error('未捕捉到的 rejection：', promise, '原因：', reason);
-		});
-		middlewareContent(err, req, res, next)
+		resErrorDev(err,res)
 	} else {
 		middlewareContent(err, req, res, next)
 	}

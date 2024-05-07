@@ -14,6 +14,12 @@ const notFound = require('./service/notFound')
 
 const app = express();
 
+const {uncaughtExceptionFn, unhandledRejectionFn} = require('./service/processError')
+
+process.on('uncaughtException', err => {
+  uncaughtExceptionFn(err)
+});
+
 require('dotenv').config();
 require('./connections');
 
@@ -34,6 +40,10 @@ app.use((err, req, res, next) => {
 
 app.use((req, res, next) => {
   notFound(req, res)
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  unhandledRejectionFn(reason, promise)
 });
 
 module.exports = app;
